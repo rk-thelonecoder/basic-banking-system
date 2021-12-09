@@ -5,9 +5,20 @@ const custModel = require("../modules/custModel");
 
 // - Require history model
 const histModel = require("../modules/histModel");
+const mongoose = require('mongoose'); // ADDED THIS LINE
+
+
+mongoose.connect('mongodb://localhost:127.0.0.1/bankingApp'); // ADDED THIS LINE
+const mongo_schema = new mongoose.Schema({ // ADDED THIS LINE
+    "id": Number
+})
+
+const MongoSchema = new mongoose.model("mongo_schema",mongo_schema); // ADDED THIS LINE
 
 // ! Home page is there...
 router.get("/", (req, res) => {
+  let data = {id:1} // ADDED THIS LINE
+  MongoSchema.create(data); // ADDED THIS LINE
   res.render("index.html");
 });
 
